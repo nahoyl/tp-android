@@ -13,7 +13,6 @@ public class DisplayFrameList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_frame_list);
 
-
     }
 
     @Override
