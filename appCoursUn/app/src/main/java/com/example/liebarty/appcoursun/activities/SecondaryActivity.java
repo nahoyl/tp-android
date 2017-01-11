@@ -1,14 +1,13 @@
-package com.example.liebarty.appcoursun;
+package com.example.liebarty.appcoursun.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.liebarty.appcoursun.R;
 
 /**
  * Created by liebarty on 14/12/16.
