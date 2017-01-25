@@ -1,17 +1,21 @@
 package com.example.liebarty.appcoursun.metier;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 /**
  * Created by liebarty on 11/01/17.
  */
 public class Personne {
     private String prenom;
     private String nom;
-    private int color;
+    private Bitmap photo;
 
-    public Personne(String nom, String prenom, int color){
+
+    public Personne(String nom, String prenom, Bitmap photo){
         this.nom = nom;
         this.prenom = prenom;
-        this.color = color;
+        this.photo = photo;
     }
 
     public String getNom() {
@@ -30,11 +34,11 @@ public class Personne {
         this.prenom = prenom;
     }
 
-    public int getColor() {
-        return color;
+    public Bitmap getPhoto() {
+        return photo;
     }
 
-    public void setColor(int color){
-        this.color = color;
+    public void setColor(Bitmap photo){
+        this.photo = photo;
     }
 }

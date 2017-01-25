@@ -1,5 +1,7 @@
 package com.example.liebarty.appcoursun.metier;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +19,13 @@ public class ListPersonne {
         liste = liste_p;
     }
 
-    public boolean addPersonne(String nom, String prenom, int color){
-        Personne p = new Personne(nom, prenom, color);
+    public boolean addPersonne(String nom, String prenom, Bitmap photo){
+        Personne p = new Personne(nom, prenom, photo);
         return liste.add(p);
     }
 
-    public boolean removePersonne(String nom, String prenom, int color){
-        Personne p = new Personne(nom, prenom, color);
+    public boolean removePersonne(String nom, String prenom, Bitmap photo){
+        Personne p = new Personne(nom, prenom, photo);
         return liste.remove(p);
     }
 
