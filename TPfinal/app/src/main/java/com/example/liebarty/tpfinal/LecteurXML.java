@@ -1,6 +1,8 @@
 package com.example.liebarty.tpfinal;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import java.io.InputStream;
 
@@ -23,20 +25,39 @@ public class LecteurXML
 
     //Attributs
     private Document _document;
+    private Element racine;
+    private NodeList noeuds;
     private boolean _aucunProbleme;
+
 
     //Constructeur
     public  LecteurXML(InputStream flux)
     {
         this.creerDocument(flux);
+        this.creerRacine();
     }
 
 
     //Méthodes
-    
+    /**
+     * @return vrai si et seulement si le fichier est récupéré,
+     * faux sinon.
+     */
+    public boolean estConvertit() {return _aucunProbleme;}
+
+
+    /**
+     * @return le nombre d'éléments du fichier XML.
+     */
+    public int getNombreImage() {return this.noeuds.getLength();}
 
 
     //Statiques
+    /**
+     * Convertit $flux en document.
+     *
+     * @param flux : représente un fichier XML, null interdit.
+     */
     private void creerDocument(InputStream flux)
     {
        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -49,5 +70,14 @@ public class LecteurXML
        catch(Exception e) {
            _aucunProbleme = false;
        }
+    }
+
+    /**
+     * Fabrique l'arborescence du fichier XML.
+     */
+    private void creerRacine()
+    {
+        this.racine = _document.getDocumentElement();
+        noeuds = this.racine.getElementsByTagName(RACINE);
     }
 }
