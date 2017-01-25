@@ -77,7 +77,7 @@ public class RecuperateurPageWeb
     {
         boolean resultat;
         try {
-            _gestionnaire = new URL("http://public.ave-comics.com/gabriel/iut/images.xml");
+            _gestionnaire = new URL(url);
             _page = (HttpURLConnection) _gestionnaire.openConnection();
             _inputStream = new BufferedInputStream(_page.getInputStream());
             resultat = true;

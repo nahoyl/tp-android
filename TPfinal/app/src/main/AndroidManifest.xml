@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ActivityAffichePhotos"
+            android:label="@string/title_activity_activity_affiche_le_photos" >
+        </activity>
     </application>
 
 </manifest>
