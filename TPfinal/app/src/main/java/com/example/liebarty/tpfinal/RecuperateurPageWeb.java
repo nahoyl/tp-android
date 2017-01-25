@@ -6,17 +6,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by ugolinir on 25/01/17.
+ * Récupère une page web est la retourne sous forme de flux.
  */
 public class RecuperateurPageWeb
 {
     //Attributs
-    /** Gestionnaire d'URL.*/
-    private URL _gestionnaire;
-
-    /** Page web contenant le fichier XML.*/
-    private HttpURLConnection _page;
-
     /** Contenu xml de la page.*/
     private InputStream _inputStream;
 
@@ -32,10 +26,7 @@ public class RecuperateurPageWeb
      * Constructeur lambda.
      * @param url : adresse web à chercher, null interdit.
      */
-    public RecuperateurPageWeb(String url)
-    {
-        _aucunProbleme = this.recupererLaPage(url);
-    }
+    public RecuperateurPageWeb(String url) {_aucunProbleme = this.recupererLaPage(url);}
 
 
     //Méthodes
@@ -76,19 +67,21 @@ public class RecuperateurPageWeb
     private boolean recupererLaPage(String url)
     {
         boolean resultat;
+        HttpURLConnection page;
+
         try {
-            _gestionnaire = new URL(url);
-            _page = (HttpURLConnection) _gestionnaire.openConnection();
-            _inputStream = new BufferedInputStream(_page.getInputStream());
-            resultat = true;
+            URL gestionnaire;
+            gestionnaire = new URL(url);
+            page = (HttpURLConnection) gestionnaire.openConnection();
+            _inputStream = new BufferedInputStream(page.getInputStream());
+            page.disconnect();
+            _messageErreur = "Pas d'erreurs.";
+            resultat = (page.getResponseCode() == HttpURLConnection.HTTP_OK);
         }
         catch(Exception e) {
-            _page = null;
+            page = null;
             _messageErreur = e.getMessage();
             resultat = false;
-        }
-        finally {
-            _page.disconnect();
         }
         return resultat;
     }
