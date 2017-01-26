@@ -1,7 +1,12 @@
 package com.example.liebarty.tpfinal;
 
+import android.util.Log;
+
+import com.example.liebarty.tpfinal.ItemImage.ListeItemImage;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.InputStream;
@@ -28,6 +33,7 @@ public class LecteurXML
     private Element racine;
     private NodeList noeuds;
     private boolean _aucunProbleme;
+    private ListeItemImage _liste;
 
 
     //Constructeur
@@ -35,6 +41,9 @@ public class LecteurXML
     {
         this.creerDocument(flux);
         this.creerRacine();
+        if(_aucunProbleme)
+            this.recupererDonnees();
+        else Log.i("Erreur donnee", "ereeru");
     }
 
 
@@ -70,6 +79,7 @@ public class LecteurXML
        catch(Exception e) {
            _aucunProbleme = false;
        }
+
     }
 
     /**
@@ -79,5 +89,37 @@ public class LecteurXML
     {
         this.racine = _document.getDocumentElement();
         noeuds = this.racine.getElementsByTagName(RACINE);
+    }
+
+    private void recupererDonnees(){
+
+        Element element=_document.getDocumentElement();
+        element.normalize();
+
+        NodeList nList = _document.getElementsByTagName(IMAGE);
+
+        for (int i=0; i<nList.getLength(); i++) {
+
+            Node node = nList.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element element2 = (Element) node;
+                String nom = getValue(NOM, element2);
+                String desc = getValue(DESC, element2);
+                RecuperateurPageWeb rpw = new RecuperateurPageWeb(getValue(URL, element2));
+                InputStream is = rpw.getInputStream();
+
+                _liste.addItemImage(nom, desc, is);
+            }
+        }
+    }
+
+    private static String getValue(String tag, Element element) {
+        NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
+        Node node = nodeList.item(0);
+        return node.getNodeValue();
+    }
+
+    public ListeItemImage getListeItemImage(){
+        return _liste;
     }
 }

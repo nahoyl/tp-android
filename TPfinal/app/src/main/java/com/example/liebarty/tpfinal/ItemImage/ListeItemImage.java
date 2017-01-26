@@ -1,4 +1,4 @@
-package com.example.liebarty.tpfinal.metier;
+package com.example.liebarty.tpfinal.ItemImage;
 
 /**
  * Created by liebarty on 25/01/17.
@@ -22,6 +22,10 @@ public class ListeItemImage {
     public boolean addItemImage(String nom, String description, InputStream photo){
         ItemImage p = new ItemImage(nom, description, photo);
         return liste.add(p);
+    }
+
+    public boolean addAllItemImage(List<ItemImage> itemImageList){
+        return liste.addAll(itemImageList);
     }
 
     public boolean removeItemImage(String nom, String description, InputStream photo){

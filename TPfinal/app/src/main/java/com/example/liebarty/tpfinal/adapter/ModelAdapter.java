@@ -9,7 +9,7 @@ package com.example.liebarty.tpfinal.adapter;
         import android.widget.TextView;
 
         import com.example.liebarty.tpfinal.R;
-        import com.example.liebarty.tpfinal.metier.ItemImage;
+        import com.example.liebarty.tpfinal.ItemImage.ItemImage;
 
         import java.util.List;
 
@@ -34,9 +34,9 @@ public class ModelAdapter extends ArrayAdapter<ItemImage> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_liste, null);
         }
 
-        PersonneViewHolder viewHolder = (PersonneViewHolder) convertView.getTag();
+        ItemImageViewHolder viewHolder = (ItemImageViewHolder) convertView.getTag();
         if(viewHolder == null){
-            viewHolder = new PersonneViewHolder();
+            viewHolder = new ItemImageViewHolder();
             viewHolder.itemImage = (ImageView)convertView.findViewById(R.id.imageImage);
             viewHolder.itemDescription = (TextView)convertView.findViewById(R.id.descriptionImage);
             viewHolder.itemNom = (TextView)convertView.findViewById(R.id.nomImage);
@@ -53,7 +53,7 @@ public class ModelAdapter extends ArrayAdapter<ItemImage> {
 
     }
 
-    private class PersonneViewHolder{
+    private class ItemImageViewHolder {
         public TextView itemDescription;
         public TextView itemNom;
         public ImageView itemImage;

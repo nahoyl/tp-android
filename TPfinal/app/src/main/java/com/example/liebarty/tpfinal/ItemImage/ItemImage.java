@@ -1,4 +1,4 @@
-package com.example.liebarty.tpfinal.metier;
+package com.example.liebarty.tpfinal.ItemImage;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
