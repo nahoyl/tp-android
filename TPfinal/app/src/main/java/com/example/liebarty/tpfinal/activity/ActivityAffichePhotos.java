@@ -2,20 +2,16 @@ package com.example.liebarty.tpfinal.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import com.example.liebarty.tpfinal.ItemImage.ListeItemImage;
+import com.example.liebarty.tpfinal.ItemImage.Categorie;
 import com.example.liebarty.tpfinal.LecteurXML;
 import com.example.liebarty.tpfinal.R;
 import com.example.liebarty.tpfinal.RecuperateurPageWeb;
 import com.example.liebarty.tpfinal.adapter.ModelAdapter;
-import com.example.liebarty.tpfinal.controleur.ControleurItemImage;
-
-import java.io.InputStream;
-import java.net.URL;
+import com.example.liebarty.tpfinal.controleur.ControleurCategories;
 
 
 public class ActivityAffichePhotos extends Activity {
@@ -27,18 +23,18 @@ public class ActivityAffichePhotos extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_affiche_photos);
 
-        ControleurItemImage ci = new ControleurItemImage(ActivityAffichePhotos.this);
+        ControleurCategories ci = new ControleurCategories(ActivityAffichePhotos.this);
 
         String urlPageWeb = "http://public.ave-comics.com/gabriel/iut/images.xml";
 
         RecuperateurPageWeb rpw = new RecuperateurPageWeb(urlPageWeb);
 
         LecteurXML lecteur = new LecteurXML(rpw.getInputStream());
-        /*
-        ListeItemImage liste = lecteur.getListeItemImage();
 
-        ci.ajouterTousItemImage(liste.getItemImage());
-        */
+        Categorie liste = lecteur.getListeImage();
+
+        ci.ajouterTousImage(liste.getItemImage());
+
         mListView = (ListView)findViewById(R.id.mlistView);
         ModelAdapter adapter = new ModelAdapter(ActivityAffichePhotos.this, ci.recupererListe());
         mListView.setAdapter(adapter);

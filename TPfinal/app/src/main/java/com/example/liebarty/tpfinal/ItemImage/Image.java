@@ -8,15 +8,15 @@ import java.io.InputStream;
 /**
  * Created by liebarty on 25/01/17.
  */
-public class ItemImage {
+public class Image {
     private String _nom;
     private String _description;
-    private Bitmap _image;
+    private Bitmap _url;
 
-    public ItemImage(String nom, String description, InputStream inputStream){
+    public Image(String nom, String description, InputStream url){
         _nom = nom;
         _description = description;
-        _image = BitmapFactory.decodeStream(inputStream);
+        _url = BitmapFactory.decodeStream(url);
 
     }
 
@@ -28,8 +28,8 @@ public class ItemImage {
         return _description;
     }
 
-    public Bitmap getImage(){
-        return _image;
+    public Bitmap getUrl(){
+        return _url;
     }
 
 }

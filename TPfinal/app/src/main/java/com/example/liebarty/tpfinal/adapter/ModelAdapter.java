@@ -9,22 +9,22 @@ package com.example.liebarty.tpfinal.adapter;
         import android.widget.TextView;
 
         import com.example.liebarty.tpfinal.R;
-        import com.example.liebarty.tpfinal.ItemImage.ItemImage;
+        import com.example.liebarty.tpfinal.ItemImage.Image;
 
         import java.util.List;
 
 /**
  * Created by liebarty on 04/01/17.
  */
-public class ModelAdapter extends ArrayAdapter<ItemImage> {
+public class ModelAdapter extends ArrayAdapter<Image> {
 
     //protected LayoutInflater _layoutInflater;
     //protected Context _context;
 
-    public ModelAdapter(Context context, List<ItemImage> liste){
+    public ModelAdapter(Context context, List<Image> liste){
         super(context, 0 , liste);
-        //_context = context;
-        //_layoutInflater = LayoutInflater.from(context);
+        //_context = _context;
+        //_layoutInflater = LayoutInflater.from(_context);
     }
 
     @Override
@@ -43,11 +43,12 @@ public class ModelAdapter extends ArrayAdapter<ItemImage> {
             convertView.setTag(viewHolder);
         }
 
-        ItemImage itemImage = getItem(position);
+        Image image = getItem(position);
 
-        viewHolder.itemNom.setText(itemImage.getNom());
-        viewHolder.itemDescription.setText(itemImage.getDescription());
-        viewHolder.itemImage.setImageBitmap(itemImage.getImage());
+        viewHolder.itemNom.setText(image.getNom());
+        viewHolder.itemDescription.setText(image.getDescription());
+        //Convertir to bitmap
+        viewHolder.itemImage.setImageBitmap(image.getUrl());
 
         return convertView;
 

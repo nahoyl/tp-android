@@ -2,7 +2,7 @@ package com.example.liebarty.tpfinal;
 
 import android.util.Log;
 
-import com.example.liebarty.tpfinal.ItemImage.ListeItemImage;
+import com.example.liebarty.tpfinal.ItemImage.Categorie;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -33,7 +33,7 @@ public class LecteurXML
     private Element racine;
     private NodeList noeuds;
     private boolean _aucunProbleme;
-    private ListeItemImage _liste;
+    private Categorie _liste;
 
 
     //Constructeur
@@ -96,6 +96,8 @@ public class LecteurXML
         Element element=_document.getDocumentElement();
         element.normalize();
 
+        _liste = new Categorie();
+
         NodeList nList = _document.getElementsByTagName(IMAGE);
 
         for (int i=0; i<nList.getLength(); i++) {
@@ -108,7 +110,7 @@ public class LecteurXML
                 RecuperateurPageWeb rpw = new RecuperateurPageWeb(getValue(URL, element2));
                 InputStream is = rpw.getInputStream();
 
-                _liste.addItemImage(nom, desc, is);
+                _liste.addImage(nom, desc, is);
             }
         }
     }
@@ -119,7 +121,7 @@ public class LecteurXML
         return node.getNodeValue();
     }
 
-    public ListeItemImage getListeItemImage(){
+    public Categorie getListeImage(){
         return _liste;
     }
 }
