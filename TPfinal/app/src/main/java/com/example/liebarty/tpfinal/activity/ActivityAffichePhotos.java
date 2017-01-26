@@ -12,6 +12,10 @@ import com.example.liebarty.tpfinal.R;
 import com.example.liebarty.tpfinal.RecuperateurPageWeb;
 import com.example.liebarty.tpfinal.adapter.ModelAdapter;
 import com.example.liebarty.tpfinal.controleur.ControleurCategories;
+import com.example.liebarty.tpfinal.thread.AsyncRecuperateur;
+
+import java.io.InputStream;
+import java.util.concurrent.ExecutionException;
 
 
 public class ActivityAffichePhotos extends Activity {
@@ -25,11 +29,21 @@ public class ActivityAffichePhotos extends Activity {
 
         ControleurCategories ci = new ControleurCategories(ActivityAffichePhotos.this);
 
-        String urlPageWeb = "http://public.ave-comics.com/gabriel/iut/images.xml";
+        String[] urlPageWeb = {"http://public.ave-comics.com/gabriel/iut/images.xml"};
 
-        RecuperateurPageWeb rpw = new RecuperateurPageWeb(urlPageWeb);
+        AsyncRecuperateur ar = new AsyncRecuperateur();
+        ar.execute(urlPageWeb);
+        InputStream is = null;
+        try {
+            is = ar.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
-        LecteurXML lecteur = new LecteurXML(rpw.getInputStream());
+
+        LecteurXML lecteur = new LecteurXML(is);
 
         Categorie liste = lecteur.getListeImage();
 

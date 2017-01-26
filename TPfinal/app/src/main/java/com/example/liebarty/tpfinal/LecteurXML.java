@@ -3,13 +3,17 @@ package com.example.liebarty.tpfinal;
 import android.util.Log;
 
 import com.example.liebarty.tpfinal.ItemImage.Categorie;
+import com.example.liebarty.tpfinal.thread.AsyncRecuperateur;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.ExecutionException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -77,9 +81,16 @@ public class LecteurXML
             _document = dom.parse(flux);
             _aucunProbleme = true;
        }
-       catch(Exception e) {
+       catch(IOException ioe) {
            _aucunProbleme = false;
        }
+        catch (SAXException se){
+            _aucunProbleme = false;
+        }
+        catch (Exception e){
+            _aucunProbleme = false;
+        }
+
 
     }
 
@@ -107,8 +118,17 @@ public class LecteurXML
                 Element element2 = (Element) node;
                 String nom = getValue(NOM, element2);
                 String desc = getValue(DESC, element2);
-                RecuperateurPageWeb rpw = new RecuperateurPageWeb(getValue(URL, element2));
-                InputStream is = rpw.getInputStream();
+
+                AsyncRecuperateur ar = new AsyncRecuperateur();
+                ar.execute(getValue(URL, element2));
+                InputStream is = null;
+                try {
+                    is = ar.get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
 
                 _liste.addImage(nom, desc, is);
             }

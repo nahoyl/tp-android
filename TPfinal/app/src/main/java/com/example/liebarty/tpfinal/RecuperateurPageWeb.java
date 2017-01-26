@@ -1,5 +1,7 @@
 package com.example.liebarty.tpfinal;
 
+import android.os.AsyncTask;
+
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -19,6 +21,7 @@ public class RecuperateurPageWeb
 
     /** Vrai si et seulement si la récupération de la page s'est effectuée sans problème.*/
     private boolean _aucunProbleme;
+
 
 
     //Constructeurs
@@ -85,4 +88,5 @@ public class RecuperateurPageWeb
         }
         return resultat;
     }
+
 }
