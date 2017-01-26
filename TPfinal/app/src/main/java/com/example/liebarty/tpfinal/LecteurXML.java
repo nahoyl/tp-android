@@ -31,7 +31,7 @@ public class LecteurXML
     //Attributs
     private Document _document;
     private Element racine;
-    private NodeList noeuds;
+    private NodeList _noeuds;
     private boolean _aucunProbleme;
     private Categorie _liste;
 
@@ -43,7 +43,7 @@ public class LecteurXML
         this.creerRacine();
         if(_aucunProbleme)
             this.recupererDonnees();
-        else Log.i("Erreur donnee", "ereeru");
+        else Log.i("Erreur donnee", "Erreur");
     }
 
 
@@ -58,7 +58,7 @@ public class LecteurXML
     /**
      * @return le nombre d'éléments du fichier XML.
      */
-    public int getNombreImage() {return this.noeuds.getLength();}
+    public int getNombreImage() {return this._noeuds.getLength();}
 
 
     //Statiques
@@ -69,6 +69,7 @@ public class LecteurXML
      */
     private void creerDocument(InputStream flux)
     {
+
        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
         try {
@@ -88,21 +89,20 @@ public class LecteurXML
     private void creerRacine()
     {
         this.racine = _document.getDocumentElement();
-        noeuds = this.racine.getElementsByTagName(RACINE);
+        //_noeuds = this.racine.getElementsByTagName(RACINE);
     }
 
     private void recupererDonnees(){
 
-        Element element=_document.getDocumentElement();
-        element.normalize();
+        racine.normalize();
 
         _liste = new Categorie();
 
-        NodeList nList = _document.getElementsByTagName(IMAGE);
+        _noeuds = _document.getElementsByTagName(RACINE);
 
-        for (int i=0; i<nList.getLength(); i++) {
+        for (int i=0; i<_noeuds.getLength(); i++) {
 
-            Node node = nList.item(i);
+            Node node = _noeuds.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element2 = (Element) node;
                 String nom = getValue(NOM, element2);
