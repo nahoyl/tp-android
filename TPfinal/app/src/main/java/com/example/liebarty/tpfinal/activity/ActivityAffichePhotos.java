@@ -42,7 +42,6 @@ public class ActivityAffichePhotos extends Activity {
             e.printStackTrace();
         }
 
-
         LecteurXML lecteur = new LecteurXML(is);
 
         Categorie liste = lecteur.getListeImage();

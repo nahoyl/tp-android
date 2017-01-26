@@ -82,13 +82,13 @@ public class LecteurXML
             _aucunProbleme = true;
        }
        catch(IOException ioe) {
-           _aucunProbleme = false;
+           //_aucunProbleme = false;
        }
         catch (SAXException se){
-            _aucunProbleme = false;
+            //_aucunProbleme = false;
         }
         catch (Exception e){
-            _aucunProbleme = false;
+            //_aucunProbleme = false;
         }
 
 

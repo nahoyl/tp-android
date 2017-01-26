@@ -76,6 +76,7 @@ public class RecuperateurPageWeb
             URL gestionnaire;
             gestionnaire = new URL(url);
             page = (HttpURLConnection) gestionnaire.openConnection();
+            page.setReadTimeout(10000);
             _inputStream = new BufferedInputStream(page.getInputStream());
             page.disconnect();
             _messageErreur = "Pas d'erreurs.";
